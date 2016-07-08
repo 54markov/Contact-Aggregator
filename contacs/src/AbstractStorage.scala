@@ -23,6 +23,12 @@ case class AbstractStorage() {
 
   def delFromHashMap(hash: String): String = {
     val foundUser = getFromHashMap(hash)
+    /*
+    foundUser match {
+     case null => return "Report: - User not found, can't remove!\n";
+     case _ => storage -= hash; return "Report: - User, " + foundUser.userName_ + ": remove!\n";
+    }
+    */
     if (foundUser == null) {
       return "Report: - User not found, can't remove!\n";
     } else {
