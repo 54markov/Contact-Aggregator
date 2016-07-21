@@ -4,19 +4,16 @@
   * Created by randy on 03.01.16.
   */
 class User(userName: String) {
-  // user name field
-  val userName_ = userName
-
-  // user identefication field
-  val uid_       = new UID
+  val userName_ = userName  // user name field
+  val uid_ = new UID        // user identefication field
 
   // user services filed
   val userService_ = scala.collection.mutable.Map[String, Service]()
 
-  def infoUser(): Unit = {
-    println(userName_)
-    userService_ foreach {case (key, value) => println ("--> " + value.description_)}
-    println()
+  def infoUser(): String = {
+    var infoString = userName_ + "\n"
+    userService_ foreach {case (key, value) => infoString += value.description_; infoString += "\n" }
+    return  infoString
   }
 
   def addService(sid: Service) {

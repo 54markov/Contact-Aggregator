@@ -1,28 +1,25 @@
-/**
-  *
-  * Describe actual user management work
-  *
-  * Created by randy on 04.01.16.
-  */
+/*
+ * Describe actual user management work
+ *
+ * Created by randy on 04.01.16.
+ */
 
 class UserManager(storage: AbstractStorage) {
   var abstractStorage = storage
 
   // work with users:
   // add user
-  def addUser(uid: User): Unit = {
+  def addUser(uid: User): String = {
     // my implementation will be here
     val userHash = uid.uid_.getHash(uid.userName_)
-    val result: String = abstractStorage.addInHashMap(userHash, uid)
-    println(result)
+    return abstractStorage.addInHashMap(userHash, uid)
   }
 
   // delete user
-  def delUser(uid: User) {
+  def delUser(uid: User) : String = {
     // my implementation will be here
     val userHash = uid.uid_.getHash(uid.userName_)
-    val result: String = abstractStorage.delFromHashMap(userHash)
-    println(result)
+    return abstractStorage.delFromHashMap(userHash)
   }
 
 
@@ -32,10 +29,9 @@ class UserManager(storage: AbstractStorage) {
     val userHash = uid.uid_.getHash(uid.userName_)
     val foundUser = abstractStorage.getFromHashMap(userHash)
 
-    if (foundUser == null) {
-      return null
-    } else {
-      return foundUser
+    foundUser match {
+      case null => return null
+      case _ => return foundUser
     }
   }
 
@@ -46,11 +42,13 @@ class UserManager(storage: AbstractStorage) {
     val userHash = uid.uid_.getHash(uid.userName_)
     val foundUser = abstractStorage.getFromHashMap(userHash)
 
-    if (foundUser == null) {
-      return "can't add service, user not found\n"
-    } else {
-      foundUser.addService(sid)
-      return "add service, " + foundUser.userName_ + " complete!\n"
+    foundUser match {
+      case null =>
+        return "can't add service, user not found\n"
+
+      case _ =>
+        foundUser.addService(sid)
+        return "add service, " + foundUser.userName_ + " complete!\n"
     }
   }
 
@@ -60,11 +58,13 @@ class UserManager(storage: AbstractStorage) {
     val userHash = uid.uid_.getHash(uid.userName_)
     val foundUser = abstractStorage.getFromHashMap(userHash)
 
-    if (foundUser == null) {
-      return "can't remove service, user not found"
-    } else {
-      foundUser.addService(sid)
-      return "remove service, " + foundUser.userName_ + " complete!\n"
+    foundUser match {
+      case null =>
+        return "can't remove service, user not found"
+
+      case _ =>
+        foundUser.addService(sid)
+        return "remove service, " + foundUser.userName_ + " complete!\n"
     }
   }
 }
