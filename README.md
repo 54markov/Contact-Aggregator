@@ -1,2 +1,2 @@
 # contact_aggregator
-simple contact aggregator (scala implementation)
+simple contact aggregator (scala implementation + gui)
