@@ -1,6 +1,8 @@
 /**
-  * Created by randy on 03.01.16.
+  * Created by randy on 14.05.17.
   */
-class Result {
-  /* wip */
+class Result extends Enumeration {
+  /*
+   * wip
+   */
 }

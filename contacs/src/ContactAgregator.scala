@@ -1,19 +1,15 @@
 /**
-  * Created by randy on 08.07.16.
+  * Created by randy on 14.05.17.
   */
-
 import javax.swing._
 import java.awt.event._
 
 object ContactAgregator {
 
-  def find(parametr:User) : String = {
-    parametr match {
-      case null =>
-        return "Report: User not found"
-
-      case _ =>
-        return "Report: User found" + "\n" + parametr.infoUser()
+  def find(user: Option[User]) : String = {
+    user match {
+      case None => "Report: User not found"
+      case Some(user) => "Report: User found" + "\n" + user.getInfo
     }
   }
 
@@ -36,7 +32,7 @@ object ContactAgregator {
 
     val panel = new JPanel()
 
-    panel.setLayout(null);
+    panel.setLayout(null)
 
     val testStorage = new AbstractStorage()
     val testManager = new UserManager(testStorage)
@@ -138,8 +134,12 @@ object ContactAgregator {
 
     frame.getContentPane.add(panel)
 
-    //Display the window.
+    //Display the window
+
+
     frame.pack
+    frame.setSize(1024, 768)
     frame.setVisible(true)
   }
 }
+
