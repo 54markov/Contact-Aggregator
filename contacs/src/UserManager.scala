@@ -1,22 +1,18 @@
 /**
-  * Created by randy on 14.05.17.
+  * Created by Markov V.A on 14.05.17.
   */
-class UserManager(abstractStorage: AbstractStorage) {
+class UserManager(abstractStorage: AbstractStorage) extends Logger {
   /*
    * Work With Users
    */
-
-  // add user
-  def addUser(user: User): String = {
+  def addUser(user: User): ResultOperation.Value = {
     abstractStorage.addInHashMap(user.getHash, user)
   }
 
-  // delete user
-  def delUser(user: User) : String = {
+  def delUser(user: User): ResultOperation.Value = {
     abstractStorage.delFromHashMap(user.getHash)
   }
 
-  // search user
   def getUser(user: User): Option[User] = {
     abstractStorage.getFromHashMap(user.getHash)
   }
@@ -24,26 +20,27 @@ class UserManager(abstractStorage: AbstractStorage) {
   /*
    * Work With Services
    */
-
-  // add service to user
-  def addService(user: User, sid: Service): String = {
+  def addService(user: User, sid: Service) : ResultOperation.Value = {
     abstractStorage.getFromHashMap(user.getHash) match {
       case Some(foundUser) =>
         foundUser.addService(sid)
-        "add service, " + foundUser.getName + " complete!\n"
+        logToFile("[INFO]: Add service, " + foundUser.getName + " complete!\n")
+        ResultOperation.OperationComplete
       case None =>
-        "can't add service, user not found\n"
+        logToFile("[INFO]: Can't add service, user not found\n")
+        ResultOperation.OperationFail
     }
   }
 
-  // delete service from user
-  def delService(user: User, sid: Service): String = {
+  def delService(user: User, sid: Service) : ResultOperation.Value = {
     abstractStorage.getFromHashMap(user.getHash) match {
       case Some(foundUser) =>
         foundUser.addService(sid)
-        "remove service, " + foundUser.getName + " complete!\n"
+        logToFile("[INFO]: remove service, " + foundUser.getName + " complete!\n")
+        ResultOperation.OperationComplete
       case None =>
-        "can't remove service, user not found"
+        logToFile("[INFO]: can't remove service, user not found")
+        ResultOperation.OperationFail
     }
   }
 }

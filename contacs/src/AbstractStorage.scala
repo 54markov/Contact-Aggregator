@@ -1,9 +1,9 @@
 /**
-  * Created by randy on 14.05.17.
+  * Created by Markov V.A on 14.05.17.
   */
 import scala.collection._
 
-class AbstractStorage() {
+class AbstractStorage extends Logger {
   // create an empty map
   private val storage = mutable.Map[String, User]()
 
@@ -11,19 +11,21 @@ class AbstractStorage() {
     storage.get(hash)
   }
 
-  def addInHashMap(hash: String, uid: User): String = {
+  def addInHashMap(hash: String, uid: User): ResultOperation.Value = {
     storage += (hash -> uid)
-
-    "Report: - New user, "+ uid.getName + ": add!\n"
+    logToFile("[INFO]: - New user, "+ uid.getName + ": add!\n")
+    ResultOperation.OperationComplete
   }
 
-  def delFromHashMap(hash: String): String = {
+  def delFromHashMap(hash: String): ResultOperation.Value = {
     getFromHashMap(hash) match {
       case Some(foundUser) =>
         storage -= hash
-        "Report: - User, " + foundUser.getName + ": remove!\n"
+        logToFile("[INFO]: - User, " + foundUser.getName + ": remove!\n")
+        ResultOperation.OperationComplete
       case None =>
-        "Report: - User not found, can't remove!\n"
+        logToFile("[INFO]: - User not found, can't remove!\n")
+        ResultOperation.OperationFail
     }
   }
 }

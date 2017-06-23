@@ -1,17 +1,28 @@
 /**
-  * Created by randy on 14.05.17.
+  * Created by Markov V.A on 14.05.17.
   */
 class Service(serviceName: String, serviceDescription: String) {
   /*
-   * service name field
+   * Service name
    */
-  val name_ : String = serviceName
+  val name : String = serviceName
+
   /*
-   * service description field
+   * Service description
    */
-  val description_ : String = serviceName + ":" + serviceDescription
+  val description : String = serviceName + ":" + serviceDescription
+
   /*
-   * service identefication field
+   * Service identefication
    */
-  val sid_ = new SID
+  val sid = new SID
+
+  /*
+   * Getters
+   */
+  def getName : String = { name }
+  def getDescription : String = { description }
+  def getSID: SID = { sid }
+
+  def encryptService : String =  { sid.getHash(name) }
 }

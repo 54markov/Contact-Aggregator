@@ -1,46 +1,40 @@
 /**
-  * Created by randy on 14.05.17.
+  * Created by Markov V.A on 14.05.17.
   */
-class User(userName: String) {
+class User(name: String) {
   /*
-   *user name field
+   *User name
    */
-  private val userName_ = userName
+  private val userName : String = name
   /*
-   * user identefication field
+   * User ID
    */
-  private val uid_      = new UID
+  private val userID = new UID
+
   /*
-   * user services filed
+   * User service
    */
-  private val userService_ = scala.collection.mutable.Map[String, Service]()
+  private val userService = scala.collection.mutable.Map[String, Service]()
 
   /*
    * Getters
    */
-  def getName : String = {
-    userName_
-  }
+  def getName : String = { userName }
+  def getHash : String = { userID.getHash(userName) }
 
   def getInfo : String = {
-    var infoString = userName_ + "\n"
+    var infoString = userName + "\n"
 
-    userService_ foreach {
-      case (key, value) => infoString += value.description_; infoString += "\n"
+    userService foreach {
+      case (key, value) => infoString += value.getDescription; infoString += "\n"
     }
 
     infoString
   }
 
-  def addService(sid: Service) {
-    userService_ += (sid.sid_.getHash(sid.name_) -> sid)
-  }
-
-  def delService(sid: Service) {
-    userService_ -= sid.sid_.getHash(sid.name_)
-  }
-
-  def getHash: String = {
-    uid_.getHash(userName_)
-  }
+  /*
+   * Util
+   */
+  def addService(service: Service) { userService += (service.encryptService -> service) }
+  def delService(service: Service) { userService -= service.encryptService }
 }

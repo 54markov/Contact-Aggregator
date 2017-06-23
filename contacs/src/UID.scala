@@ -1,5 +1,5 @@
 /**
-  * Created by randy on 14.05.17.
+  * Created by Markov V.A on 14.05.17.
   */
 import java.security.MessageDigest
 
