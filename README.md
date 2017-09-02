@@ -1,2 +1,5 @@
-# contact_aggregator
-simple contact aggregator (scala implementation + gui)
+#  Contact Aggregator
+Feature list:
+* Scala
+* GUI
+* Provide to agregate user information for differnt type of services (e-mail, social network, etc)
