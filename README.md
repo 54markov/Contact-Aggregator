@@ -1,5 +1,5 @@
 #  Contact Aggregator
-Feature list:
+### Features:
 * Scala
 * GUI
-* Provide to agregate user information for differnt type of services (e-mail, social network, etc)
+* Agregate user information for differnt type of services (e-mail, social network, etc)
